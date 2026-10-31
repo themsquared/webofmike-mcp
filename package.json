@@ -1,0 +1,39 @@
+{
+  "name": "webofmike-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Mike Moore's blog at https://webofmike.com",
+  "main": "src/index.ts",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "start:http": "tsx src/http.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://origin.cursor.com/git/mike-moore-dev/tmp-326be256ab0b682a.git"
+  },
+  "keywords": [
+    "mcp",
+    "webofmike",
+    "mike-moore",
+    "blog"
+  ],
+  "author": "Mike Moore",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@modelcontextprotocol/node": "^2.1.2",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "tsx": "^4.23.15",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  }
+}
