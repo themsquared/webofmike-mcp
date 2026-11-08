@@ -10,16 +10,7 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# Streamable HTTP MCP. Clients POST JSON-RPC to /mcp.
-# The function is also at /.netlify/functions/mcp.
-[[redirects]]
-  from = "/mcp"
-  to = "/.netlify/functions/mcp"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/mcp/*"
-  to = "/.netlify/functions/mcp"
-  status = 200
-  force = true
+# Do not rewrite /mcp to /.netlify/functions/mcp.
+# This is a Functions 2.0 handler with `export const config.path = "/mcp"`.
+# A custom path replaces the default URL, so a forced rewrite to
+# /.netlify/functions/mcp 404s (that path no longer exists).

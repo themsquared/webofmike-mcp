@@ -41,5 +41,5 @@ export default async function mcp(request: Request): Promise<Response> {
 }
 
 export const config = {
-  path: '/mcp',
+  path: ['/mcp', '/mcp/*'],
 };

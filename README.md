@@ -212,7 +212,7 @@ This is a **separate** Netlify site from the Hugo blog on webofmike.com. Same ac
 5. **Domain management → Add custom domain** → `mcp.webofmike.com`.
 6. Create the DNS record below. Wait for Netlify to issue HTTPS, then prefer the custom domain in client configs.
 
-`netlify.toml` rewrites `/mcp` (and `/mcp/*`) to `/.netlify/functions/mcp`. The function is POST-only, stateless (`createMcpHandler` + `legacy: 'stateless'`, no session store), and has no bearer check.
+The function mounts at `/mcp` via `export const config.path` (Functions 2.0). Do not add a `netlify.toml` rewrite to `/.netlify/functions/mcp` — a custom path **replaces** that default URL, and a forced rewrite 404s. The handler is POST-only, stateless (`createMcpHandler` + `legacy: 'stateless'`, no session store), and has no bearer check.
 
 Local function preview (optional): `npx netlify-cli dev`, then POST `http://localhost:8888/mcp`.
 
@@ -246,7 +246,7 @@ src/server.ts                tool registration
 src/catalog.ts               live fetch + 10-minute cache
 src/parse.ts                 RSS / llms.txt / sitemap / markdown
 netlify/functions/mcp.ts     Netlify Function (POST /mcp)
-netlify.toml                 /mcp → function rewrite
+netlify.toml                 build + functions dir (no /mcp rewrite)
 public/index.html            landing page on the Netlify site
 tests/anonymous-http.test.ts anonymous initialize + tools/list
 docs/optional-mcps/webofmike/manifest.yaml
