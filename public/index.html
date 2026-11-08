@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>webofmike MCP v1</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, sans-serif; background: #111114; color: #ecece8; }
+    main { max-width: 40rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    h1 { font-size: 1.6rem; letter-spacing: -0.03em; margin: 0 0 0.4rem; }
+    p, li { line-height: 1.55; color: #c8c8c2; }
+    a { color: #8fd0ff; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; background: #1c1c22; padding: 0.1em 0.35em; border-radius: 4px; }
+    .card { border: 1px solid #2a2a32; border-radius: 12px; padding: 1rem 1.1rem; margin: 1.25rem 0; background: #17171c; }
+    .muted { color: #8d8d86; font-size: 0.92rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="muted">MCP server v1.0.0 · public posts only · no auth</p>
+    <h1>Web of Mike</h1>
+    <p>Live index of <a href="https://webofmike.com">webofmike.com</a>. Two read-only tools: <code>search_posts</code> and <code>get_post</code>.</p>
+    <div class="card">
+      <p><strong>Streamable HTTP endpoint</strong></p>
+      <p><code>https://mcp.webofmike.com/mcp</code></p>
+      <p class="muted">Fallback while DNS propagates: <code>https://webofmike-mcp.netlify.app/mcp</code>. Point Cursor, Claude, Hermes, Gemini, or MCP Inspector at this URL. POST JSON-RPC; no credentials.</p>
+    </div>
+    <ul>
+      <li><code>search_posts</code> — query → title, slug, URL, summary, date</li>
+      <li><code>get_post</code> — slug → markdown body, canonical URL, title, date, tags/series</li>
+    </ul>
+    <p class="muted">Source: <a href="https://github.com/themsquared/webofmike-mcp">themsquared/webofmike-mcp</a>. Stdio: <code>npx tsx src/index.ts</code>.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,25 @@
+[build]
+  command = "npm run typecheck"
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Streamable HTTP MCP. Clients POST JSON-RPC to /mcp.
+# The function is also at /.netlify/functions/mcp.
+[[redirects]]
+  from = "/mcp"
+  to = "/.netlify/functions/mcp"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/mcp/*"
+  to = "/.netlify/functions/mcp"
+  status = 200
+  force = true

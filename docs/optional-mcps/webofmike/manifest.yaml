@@ -1,0 +1,45 @@
+# DRAFT — proposed Hermes optional-mcps catalog entry (HTTP, no auth).
+# Copy into NousResearch/hermes-agent as optional-mcps/webofmike/manifest.yaml
+# after https://mcp.webofmike.com/mcp is live. Presence in that directory is
+# Nous approval; this file is not the catalog itself.
+#
+# Nous-approved MCP catalog entry.
+# Presence in this directory = approval. Merged via PR review.
+manifest_version: 1
+
+name: webofmike
+description: Search and read public posts from Mike Moore's engineering blog at webofmike.com.
+source: https://github.com/themsquared/webofmike-mcp
+
+# Vendor-hosted remote MCP (URL-only — Hermes never spawns a local process).
+# No authentication: initialize and tools/list succeed anonymously.
+transport:
+  type: http
+  url: https://mcp.webofmike.com/mcp
+
+auth:
+  type: none
+
+tools:
+  default_enabled:
+    - search_posts
+    - get_post
+
+suggest:
+  keywords:
+    - webofmike
+    - web of mike
+    - mike moore
+  hosts:
+    - webofmike.com
+    - mcp.webofmike.com
+
+post_install: |
+  No account or credentials needed — tools are available as soon as the
+  session restarts.
+
+  Primary URL: https://mcp.webofmike.com/mcp
+  Fallback:    https://webofmike-mcp.netlify.app/mcp
+
+  If the custom domain is not live yet, re-add with:
+    hermes mcp add webofmike --url "https://webofmike-mcp.netlify.app/mcp"

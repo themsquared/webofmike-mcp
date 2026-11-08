@@ -1,20 +1,18 @@
 import { createServer as createHttpServer } from 'node:http';
-import { createMcpHandler } from '@modelcontextprotocol/server';
 import {
   localhostHostValidation,
   localhostOriginValidation,
   toNodeHandler,
 } from '@modelcontextprotocol/node';
 import { SERVER_NAME, SERVER_VERSION } from './config.ts';
-import { createServer } from './server.ts';
+import { mcpHandler } from './handler.ts';
 
 const port = Number.parseInt(process.env.PORT ?? '43147', 10);
 const host = process.env.HOST ?? '127.0.0.1';
 const mcpPath = process.env.MCP_PATH ?? '/mcp';
 const loopback = host === '127.0.0.1' || host === 'localhost' || host === '::1';
 
-const handler = createMcpHandler(createServer, { responseMode: 'json' });
-const nodeHandler = toNodeHandler(handler, {
+const nodeHandler = toNodeHandler(mcpHandler, {
   onerror: (error) => {
     console.error('webofmike-mcp http error:', error);
   },
@@ -49,7 +47,7 @@ function landingPage(baseUrl: string): string {
     <div class="card">
       <p><strong>Streamable HTTP endpoint</strong></p>
       <p><code>${baseUrl}${mcpPath}</code></p>
-      <p class="muted">No authentication. Point Cursor, Claude, Gemini, or MCP Inspector at this URL after you deploy it on HTTPS.</p>
+      <p class="muted">No authentication. Remote: <a href="https://mcp.webofmike.com/mcp">https://mcp.webofmike.com/mcp</a> (fallback <code>https://webofmike-mcp.netlify.app/mcp</code>).</p>
     </div>
     <ul>
       <li><code>search_posts</code> — query → title, slug, URL, summary, date</li>
@@ -100,7 +98,7 @@ httpServer.listen(port, host, () => {
 
 const shutdown = async () => {
   httpServer.close();
-  await handler.close();
+  await mcpHandler.close();
   process.exit(0);
 };
 
