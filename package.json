@@ -10,6 +10,7 @@
     "start": "tsx src/index.ts",
     "start:http": "tsx src/http.ts",
     "smoke": "tsx scripts/smoke.ts",
+    "test": "tsx --test tests/anonymous-http.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "repository": {
